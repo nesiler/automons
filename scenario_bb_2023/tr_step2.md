@@ -10,7 +10,7 @@ Bu adımda sizlere, henüz geliştirme aşamasında olan ve tamamlanmamış bir 
 
 Automons, Docker, Python, Jinja2 ve Ansible kullanarak Grafana panellerini ve data sourcelari uzaktaki makineler üzerine yerleştirmenize ve yönetmenize olanak tanıyan bir sistemdir. Komut satırı arayüzü üzerinden kullanıcılar, çeşitli parametreleri yapılandırarak Grafana panellerini zahmetsizce oluşturabilir ve yönetebilir.
 
-Daha fazla bilgi için: [Automons Plan](https://github.com/nesiler/automons/blob/main/plan_en.md)
+Daha fazla bilgi için: [Automons Plan](https://github.com/nesiler/automons/blob/main/README.md)
 
 ## Demo Adımı: Docker-Compose ile Grafana Provisioning
 
