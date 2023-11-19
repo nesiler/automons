@@ -1,0 +1,14 @@
+- hosts: "{{ hosts | default('all') }}"
+  connection: docker
+
+  collections:
+    - community.grafana
+
+  tasks:
+    - name: install docker and docker-compose
+      ansible.builtin.package:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - docker
+        - docker-compose

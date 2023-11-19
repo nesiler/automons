@@ -1,0 +1,10 @@
+- hosts: {{ host }}
+  connection: docker
+
+  collections:
+    - community.grafana
+
+  vars:
+    template_path: { { playbook_dir } }
+
+  tasks:

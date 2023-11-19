@@ -1,0 +1,33 @@
+# docker-compose.yml.j2
+version: '3.8'
+
+networks:
+  monitoring:
+    driver: bridge
+
+volumes:
+  grafana_data: {}
+
+services:
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD={{ grafana_admin_password }}
+      - GF_USERS_DEFAULT_THEME=dark
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_USERS_AUTO_ASSIGN_ORG=true
+      - GF_USERS_AUTO_ASSIGN_ORG_ROLE=Admin
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+    restart: unless-stopped
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - {{ grafana_ini_path }}:/usr/share/grafana/conf/grafana.ini
+      - {{ grafana_dashboards_path }}:/etc/grafana/provisioning/dashboards
+      - {{ grafana_datasources_path }}:/etc/grafana/provisioning/datasources
+      - {{ grafana_models_path }}:/var/lib/grafana/dashboards
+    ports:
+      - "{{ grafana_port }}:3000"
+    networks:
+      - monitoring

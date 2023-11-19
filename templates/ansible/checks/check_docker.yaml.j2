@@ -1,0 +1,10 @@
+- hosts: "{{ hosts | default('all') }}"
+  connection: docker
+
+  collections:
+    - community.grafana
+
+  tasks:
+    - name: Check if Docker is installed
+      ansible.builtin.shell: docker ps
+      register: status

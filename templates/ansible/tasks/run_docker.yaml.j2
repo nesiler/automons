@@ -1,0 +1,15 @@
+- hosts: { { host } }
+  connection: docker
+
+  collections:
+    - community.grafana
+
+  vars:
+    template_path: "{{template_path}}"
+
+  tasks:
+    - name: run docker-compose file at path
+      community.grafana.docker_compose:
+        project_src: {{ template_path }}
+        project_name: automons
+        state: present

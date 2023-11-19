@@ -1,7 +1,7 @@
 import os
 import re
+
 import argparse
-import utils.printer as out
 
 
 def check_args(args, parser):
@@ -62,11 +62,10 @@ def check_args(args, parser):
     return True
 
 
-def is_valid_dashboard_id(dashboards):
-    for dashboard_id in dashboards:
-        if dashboard_id <= 0:
-            print("Dashboard ID must be a positive integer.")
-            return False
+def is_valid_dashboard_id(dashboard_id):
+    if dashboard_id <= 0:
+        print("Dashboard ID must be a positive integer.")
+        return False
     return True
 
 
@@ -101,18 +100,18 @@ def is_valid_host(host):
 def is_valid_template_path(template_path):
     return template_path != "" and os.path.isdir(template_path) and os.path.exists(template_path)
 
+
 def is_valid_export_path(export_path):
-    return not os.path.exists(export_path)
+    return export_path != "" and os.path.isdir(export_path) and os.path.exists(export_path)
 
 
 def is_valid_port(port):
     return 0 <= port <= 65535
 
 
-
 def parse_args():
     parser = argparse.ArgumentParser(description="Automatic Monitoring System (Automons) CLI")
-    parser.add_argument("-d", "--dashboard", nargs='+', type=int, help="Dashboard ID(s) from Grafana Labs.")
+    parser.add_argument("-d", "--dashboard", type=int, help="Dashboard ID from Grafana Labs.")
     parser.add_argument("--host", type=str,
                         help="Host group name or ip address. \n Example: '--host test' or '--host 192.168.1.5'")
     parser.add_argument("-t", "--temp", type=str,

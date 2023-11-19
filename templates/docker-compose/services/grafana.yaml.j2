@@ -1,0 +1,22 @@
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_DEFAULT_THEME=dark
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_USERS_AUTO_ASSIGN_ORG=true
+      - GF_USERS_AUTO_ASSIGN_ORG_ROLE=Admin
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+    restart: unless-stopped
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./templates/conf/grafana.ini:/usr/share/grafana/conf/grafana.ini
+      - ./templates/dashboards:/etc/grafana/provisioning/dashboards
+      - ./templates/datasources:/etc/grafana/provisioning/datasources
+      - ./templates/models:/var/lib/grafana/dashboards
+    ports:
+      - 3000:3000
+    networks:
+      - monitoring
